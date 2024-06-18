@@ -1,0 +1,12 @@
+* Description
+A boilerplate for Flink-based projects which contains some useful pieces of code.
+The main functionality of the boilerplate is to consume orders from a queue, group them by id in a session window and print the latest result.
+* What's inside
+- Consuming from RabbitMQ with custom deserialization
+- Custom watermark generator (advance a watermark if no events for 5s)
+- Simple flat function implementation
+
+* Requirements for the project
+- Java 11 (tested w/ Amazon Correto SDK)
+- If you're using IntelliJ IDEA go to Run/Debug configuration -> Modify options -> check "Add dependencies with 'provided' scope..."
+- RabbitMQ up and running
