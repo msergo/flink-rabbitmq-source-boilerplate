@@ -5,8 +5,10 @@ The main functionality of the boilerplate is to consume orders from a queue, gro
 - Consuming from RabbitMQ with custom deserialization
 - Custom watermark generator (advance a watermark if no events for 5s)
 - Simple flat function implementation
+- Postgres sink
 
 * Requirements for the project
 - Java 11 (tested w/ Amazon Correto SDK)
 - If you're using IntelliJ IDEA go to Run/Debug configuration -> Modify options -> check "Add dependencies with 'provided' scope..."
 - RabbitMQ up and running
+- Postgres up and running
