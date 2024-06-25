@@ -1,3 +1,5 @@
+[[file:https://github.com/msergo/flink-rabbitmq-source-boilerplate/actions/workflows/maven.yml/badge.svg][Build Status]]
+
 * Description
 A boilerplate for Flink-based projects which contains some useful pieces of code.
 The main functionality of the boilerplate is to consume orders from a queue, group them by id in a session window and print the latest result.
