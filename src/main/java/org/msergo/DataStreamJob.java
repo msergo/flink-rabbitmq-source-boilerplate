@@ -1,5 +1,6 @@
 package org.msergo;
 
+import com.typesafe.config.Config;
 import org.apache.flink.api.common.eventtime.Watermark;
 import org.apache.flink.api.common.eventtime.WatermarkGenerator;
 import org.apache.flink.api.common.eventtime.WatermarkOutput;
@@ -12,6 +13,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.rabbitmq.common.RMQConnectionConfig;
+import org.msergo.config.ConfigManager;
 import org.msergo.models.CoreApiMessage;
 import org.msergo.models.Order;
 import org.msergo.sources.RabbitMQCustomSource;
@@ -19,11 +21,13 @@ import org.msergo.sources.RabbitMQCustomSource;
 public class DataStreamJob {
 
     public static void main(String[] args) throws Exception {
+        Config config = ConfigManager.getConfig();
+
         final RMQConnectionConfig connectionConfig = new RMQConnectionConfig.Builder()
-                .setHost("localhost")
+                .setHost(config.getString("rabbitmq.host"))
                 .setVirtualHost("/")
-                .setUserName("user")
-                .setPassword("bitnami")
+                .setUserName(config.getString("rabbitmq.user"))
+                .setPassword(config.getString("rabbitmq.password"))
                 .setPort(5672)
                 .build();
 
@@ -84,10 +88,10 @@ public class DataStreamJob {
                                         .withMaxRetries(5)
                                         .build(),
                                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
-                                        .withUrl("jdbc:postgresql://localhost:5432/postgres")
-                                        .withDriverName("org.postgresql.Driver")
-                                        .withUsername("postgres")
-                                        .withPassword("somePassword")
+                                        .withUrl(config.getString("db.connectionUrl"))
+                                        .withDriverName(config.getString("db.driver"))
+                                        .withUsername(config.getString("db.user"))
+                                        .withPassword(config.getString("db.password"))
                                         .build()
                         ));
 
