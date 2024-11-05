@@ -112,7 +112,7 @@ under the License.
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-connector-jdbc</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
